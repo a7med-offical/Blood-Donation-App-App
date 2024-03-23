@@ -104,7 +104,7 @@ class _RegisterAsHospitalViewState extends State<RegisterAsHospitalView> {
                                   context,
                                   MaterialPageRoute(
                                       builder: ((context) => HospitalDashboard(
-                                            snap: snapshot.docs[0],
+        snap: snapshot.docs[0],
                                           ))));
                             });
                           }
