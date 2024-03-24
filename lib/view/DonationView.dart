@@ -13,6 +13,7 @@ import 'package:bldapp/widget/custom_space.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../Colors.dart';
+import '../Provider/theme_provider.dart';
 
 class DonationView extends StatefulWidget {
   const DonationView({super.key});
@@ -140,14 +141,14 @@ class _DonationViewState extends State<DonationView> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15),
               side: BorderSide(color: Color(0xffFFCA28), width: 3)),
-          color: Colors.transparent,
+           color: Colors.amber[400],
           onPressed: details.onStepCancel,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
               'Back',
               style: TextStyle(
-                  color: Color(0xffFFCA28),
+                  // color: Color(0xffFFCA28),
                   fontWeight: FontWeight.bold,
                   fontSize: 24),
             ),
@@ -163,7 +164,7 @@ class _DonationViewState extends State<DonationView> {
             child: Text(
               button,
               style: TextStyle(
-                  color: background, fontWeight: FontWeight.bold, fontSize: 24),
+             fontWeight: FontWeight.bold, fontSize: 24),
             ),
           ),
         ),
@@ -195,14 +196,15 @@ class _DonationViewState extends State<DonationView> {
           bloodType: 'B+');
       print(prov.selectPressure);
     }
+    var _theme = Provider.of<ThemeProvider>(context);
 
     return Scaffold(
-      backgroundColor: background,
       body: Theme(
         data: ThemeData(
-            canvasColor: Colors.amber[400],
-            primaryColor: background,
-            colorScheme: ColorScheme.light(primary: background)),
+            // canvasColor: Colors.amber[400],
+            // primaryColor: background,
+            // 
+        ),
         child: SafeArea(
           top: true,
           child: Stepper(
@@ -230,7 +232,7 @@ class _DonationViewState extends State<DonationView> {
                           Text(
                             'Gender : ',
                             style: TextStyle(
-                              color: Colors.amber[400],
+                              // color: Colors.amber[400],
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
@@ -314,7 +316,7 @@ class _DonationViewState extends State<DonationView> {
                           Text(
                             'Smoking : ',
                             style: TextStyle(
-                              color: Colors.amber[400],
+                              // color: Colors.amber[400],
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
                             ),
@@ -361,7 +363,7 @@ class _DonationViewState extends State<DonationView> {
                             Text(
                               'Blood Pressure :',
                               style: TextStyle(
-                                color: Colors.amber[400],
+                                // color: Colors.amber[400],
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -392,7 +394,7 @@ class _DonationViewState extends State<DonationView> {
                             Text(
                               'Level of Hemoglobin :',
                               style: TextStyle(
-                                color: Colors.amber[400],
+                                // color: Colors.amber[400],
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -408,8 +410,7 @@ class _DonationViewState extends State<DonationView> {
                                 return null;
                               },
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
+                                  color:_theme.isDarkMode ?Colors.white : background,
                                   fontWeight: FontWeight.bold),
                               onChanged: (value) {
                                 setState(() {
@@ -424,17 +425,19 @@ class _DonationViewState extends State<DonationView> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide: BorderSide(
-                                    color: Color(0xffFFCA28),
+                                    // color: Color(0xffFFCA28),
                                   ),
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0xffFFCA28),
+                                                               color:_theme.isDarkMode ?Colors.white : background,
+
                                     ),
                                     borderRadius: BorderRadius.circular(20)),
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0xffFFCA28),
+                                        color:_theme.isDarkMode ?Colors.white : background,
+
                                     ),
                                     borderRadius: BorderRadius.circular(20)),
                               ),
@@ -443,7 +446,7 @@ class _DonationViewState extends State<DonationView> {
                             Text(
                               'Age :',
                               style: TextStyle(
-                                color: Colors.amber[400],
+                                // color: Colors.amber[400],
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -453,9 +456,11 @@ class _DonationViewState extends State<DonationView> {
                             ),
                             TextFormField(
                               style: TextStyle(
+                             color:_theme.isDarkMode ?Colors.white : background,
+
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                 ),
                               onChanged: (value) {
                                 setState(() {
                                   age = int.tryParse(value);
@@ -470,7 +475,7 @@ class _DonationViewState extends State<DonationView> {
                               decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0xffFFCA28),
+                                      
                                     ),
                                     borderRadius: BorderRadius.circular(20)),
                                 hintText: 'Enter your age',
@@ -479,12 +484,13 @@ class _DonationViewState extends State<DonationView> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide: BorderSide(
-                                    color: Color(0xffFFCA28),
+                                                                  color:_theme.isDarkMode ?Colors.white : background,
+
                                   ),
                                 ),
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0xffFFCA28),
+                                color:_theme.isDarkMode ?Colors.white : background,
                                     ),
                                     borderRadius: BorderRadius.circular(20)),
                               ),
@@ -493,7 +499,7 @@ class _DonationViewState extends State<DonationView> {
                             Text(
                               'BMI :',
                               style: TextStyle(
-                                color: Colors.amber[400],
+                                //  color: Colors.amber[400],
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -503,9 +509,11 @@ class _DonationViewState extends State<DonationView> {
                             ),
                             TextFormField(
                               style: TextStyle(
+                                                                  color:_theme.isDarkMode ?Colors.white : background,
+
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white),
+                                  ),
                               onChanged: (value) {
                                 setState(() {
                                   bmi = int.tryParse(value);
@@ -520,7 +528,8 @@ class _DonationViewState extends State<DonationView> {
                               decoration: InputDecoration(
                                 focusedBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0xffFFCA28),
+                                                                    color:_theme.isDarkMode ?Colors.white : background,
+
                                     ),
                                     borderRadius: BorderRadius.circular(20)),
                                 hintText: 'Enter your weight',
@@ -529,14 +538,19 @@ class _DonationViewState extends State<DonationView> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(20),
                                   borderSide: BorderSide(
-                                    color: Color(0xffFFCA28),
+                                color:_theme.isDarkMode ?Colors.white : background,
+
                                   ),
                                 ),
+                                
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
-                                      color: Color(0xffFFCA28),
+                                  color:_theme.isDarkMode ?Colors.white : background,
+                                   
                                     ),
                                     borderRadius: BorderRadius.circular(20)),
+
+                                    
                               ),
                             ),
                           ],
@@ -560,7 +574,7 @@ class _DonationViewState extends State<DonationView> {
                             Text(
                               'Chronic Kidney Disease :',
                               style: TextStyle(
-                                color: Colors.amber[400],
+                                // color: Colors.amber[400],
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -591,7 +605,7 @@ class _DonationViewState extends State<DonationView> {
                             Text(
                               'Adrenal And Thyroid Disorders :',
                               style: TextStyle(
-                                color: Colors.amber[400],
+                                // color: Colors.amber[400],
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -624,7 +638,7 @@ class _DonationViewState extends State<DonationView> {
                             Text(
                               'Have you donated previously ? ',
                               style: TextStyle(
-                                color: Colors.amber[400],
+                                // color: Colors.amber[400],
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
@@ -661,29 +675,42 @@ class _DonationViewState extends State<DonationView> {
                                   return null;
                                 },
                                 style: TextStyle(
+                                    color:_theme.isDarkMode ?Colors.white : background,
+
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  // color: Colors.white,
                                 ),
                                 controller: _textEditingController,
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderSide: const BorderSide(
                                       width: 2,
-                                      color: Color(0xffFFCA28),
+                                      // color: Color(0xffFFCA28),
                                     ),
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
                                   errorStyle: TextStyle(color: Colors.white),
                                   hintText: 'Select your blood type',
-                                  hintStyle: const TextStyle(
-                                    color: Colors.grey,
+                                  
+                                  hintStyle:  TextStyle(
+                                color:_theme.isDarkMode ?Colors.white : background,
+
                                     fontSize: 18,
                                   ),
                                   enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(
                                       width: 2,
-                                      color: Color(0xffFFCA28),
+                                     color:_theme.isDarkMode ?Colors.white : background,
+
+                                    ),
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  focusedBorder:  OutlineInputBorder(
+                                    borderSide: BorderSide(
+                                      width: 2,
+                                     color:_theme.isDarkMode ?Colors.white : background,
+
                                     ),
                                     borderRadius: BorderRadius.circular(20.0),
                                   ),
@@ -694,7 +721,7 @@ class _DonationViewState extends State<DonationView> {
                                         icon: Icon(
                                           Icons.arrow_drop_down_outlined,
                                           size: 30,
-                                          color: Color(0xffFFCA28),
+                                          // color: Color(0xffFFCA28),
                                         ),
                                         items: _options.map((String option) {
                                           return DropdownMenuItem<String>(

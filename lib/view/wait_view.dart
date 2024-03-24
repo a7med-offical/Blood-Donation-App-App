@@ -55,7 +55,6 @@ class _LoadingViewState extends State<LoadingView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: background,
       body: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

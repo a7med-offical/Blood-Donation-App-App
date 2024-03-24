@@ -1,5 +1,3 @@
-// ignore_for_file: override_on_non_overriding_member
-
 import 'dart:math';
 import 'package:awesome_icons/awesome_icons.dart';
 import 'package:bldapp/Colors.dart';
@@ -14,13 +12,13 @@ class HospitalData {
   final GeoPoint location;
   final Map<String, int> bloodTypes;
   final String? path;
-  final String? rate;
+  // final String? rate;
   HospitalData(
       {required this.name,
       required this.location,
       required this.bloodTypes,
       this.path,
-      this.rate});
+      });
 }
 
 class DonationHospitalResualt extends StatefulWidget {
@@ -38,10 +36,8 @@ class _DonationHospitalResualtState extends State<DonationHospitalResualt> {
   bool isInitialized = false;
   @override
   void initState() {
-    super.initState();
-    //   addHospitalsData();
+    super.initState();   
     getCurrentLocation();
-    // findHospitals();
   }
 
   @override
@@ -60,7 +56,6 @@ class _DonationHospitalResualtState extends State<DonationHospitalResualt> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: background,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(100.0), // Set the desired height here
           child: AppBar(
@@ -74,10 +69,9 @@ class _DonationHospitalResualtState extends State<DonationHospitalResualt> {
                   Icons.arrow_back,
                   color: Colors.amber[400],
                 )),
-            backgroundColor: background,
             title: Text('Hospitals',
                 style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.amber[400])),
+                    fontWeight: FontWeight.bold)),
             actions: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -85,10 +79,9 @@ class _DonationHospitalResualtState extends State<DonationHospitalResualt> {
                   children: [
                     CircleAvatar(
                       radius: 25,
-                      backgroundColor: Colors.amber[400],
                       child: Text(
                         widget.searchController,
-                        style: TextStyle(color: background),
+                        style: TextStyle(),
                       ),
                     ),
                   ],
@@ -100,7 +93,7 @@ class _DonationHospitalResualtState extends State<DonationHospitalResualt> {
         body: (hospitals.isEmpty && currentPosition == null)
             ? Center(
                 child: CircularProgressIndicator(
-                  color: Colors.amber[400],
+                  // color: Colors.amber[400],
                 ),
               )
             : SingleChildScrollView(
@@ -111,20 +104,20 @@ class _DonationHospitalResualtState extends State<DonationHospitalResualt> {
                       const SizedBox(height: 8.0),
                       FutureBuilder<QuerySnapshot>(
                         future:
-                            FirebaseFirestore.instance.collection('Hos').get(),
+                            FirebaseFirestore.instance.collection('HospitalRegisterData').get(),
                         builder: (BuildContext context,
                             AsyncSnapshot<QuerySnapshot> snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
                             return Center(
                                 child: CircularProgressIndicator(
-                              color: Colors.amber,
+                              // color: Colors.amber,
                             ));
                           } else if (snapshot.hasError ||
                               snapshot.data == null) {
                             return Center(
                                 child: CircularProgressIndicator(
-                              color: Colors.amber,
+                              // color: Colors.amber,
                             ));
                           } else if (snapshot.hasData) {
                             return ListView.builder(
@@ -188,16 +181,18 @@ class _DonationHospitalResualtState extends State<DonationHospitalResualt> {
                                               },
                                               icon: Icon(FontAwesomeIcons
                                                   .locationArrow),
-                                              color: Colors.amber,
+                                              // color: Colors.amber,
                                             ),
                                             leading: const Icon(
                                               Icons.location_on_outlined,
-                                              color: Colors.amber,
+                                              // color: Colors.amber,
                                             ),
                                             title: Text(hospitals[index].name,
                                                 style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.amber)),
+                                                    // color: Colors.amber
+                                                    )
+                                                    ),
                                             subtitle: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -205,24 +200,9 @@ class _DonationHospitalResualtState extends State<DonationHospitalResualt> {
                                                 Text(
                                                   'Blood Type: $bloodType, available: $bloodTypeCount',
                                                   style: const TextStyle(
-                                                      color: Colors.white),
+                                                      ),
                                                 ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      'Rating:  ${hospitals[index].rate}  ',
-                                                      style: const TextStyle(
-                                                          color: Colors.white),
-                                                    ),
-                                                    Icon(
-                                                      Icons.star_rate_rounded,
-                                                      color:
-                                                          Colors.yellowAccent,
-                                                    )
-                                                  ],
-                                                ),
+                                                
                                                 Text(
                                                   '${double.parse(
                                                     (Geolocator.distanceBetween(
@@ -240,7 +220,9 @@ class _DonationHospitalResualtState extends State<DonationHospitalResualt> {
                                                         .toStringAsFixed(2),
                                                   )} Km ',
                                                   style: const TextStyle(
-                                                      color: Colors.white),
+                                                      // color: Colors.white
+                                                      // 
+                                                      ),
                                                 ),
                                               ],
                                             ),
@@ -262,7 +244,7 @@ class _DonationHospitalResualtState extends State<DonationHospitalResualt> {
                           } else {
                             return Center(
                                 child: CircularProgressIndicator(
-                              color: Colors.amber,
+                              // color: Colors.amber,
                             ));
                           }
                         },
@@ -286,15 +268,14 @@ class _DonationHospitalResualtState extends State<DonationHospitalResualt> {
   void findHospitals() async {
     hospitals.clear();
     QuerySnapshot querySnapshot =
-        await FirebaseFirestore.instance.collection('Hos').get();
+        await FirebaseFirestore.instance.collection('HospitalRegisterData').get();
     List<HospitalData> allHospitals = [];
     for (var doc in querySnapshot.docs) {
       HospitalData hospital = HospitalData(
-        rate: doc['rate'],
-        path: doc['path'],
+        path: doc['image'],
         name: doc['name'],
         location: doc['location'],
-        bloodTypes: Map<String, int>.from(doc['bloodTypes']),
+        bloodTypes: Map<String, int>.from(doc['bloodtype']),
       );
       allHospitals.add(hospital);
     }
@@ -359,82 +340,5 @@ class _DonationHospitalResualtState extends State<DonationHospitalResualt> {
     return distance;
   }
 
-  Future<void> addHospitalsData() async {
-    final hospitals = [
-      HospitalData(
-          name: 'Sohag University Hospital',
-          location: const GeoPoint(26.56720895276951, 31.70735501859601),
-          bloodTypes: {
-            'A+': 4,
-            'B+': 5,
-            'A-': 0,
-            'O+': 4,
-            'O-': 3,
-            'AB+': 5,
-            'AB-': 3,
-            'B-': 3
-          },
-          path: 'Assets/Images/sohag3.jfif',
-          rate: '3.3'),
-      HospitalData(
-          name: 'Rashid Specialized Hospital',
-          location: const GeoPoint(26.557245432374373, 31.706877905103703),
-          bloodTypes: {
-            'A+': 3,
-            'B+': 7,
-            'AB-': 8,
-            'A-': 0,
-            'O+': 4,
-            'O-': 3,
-            'AB+': 6,
-            'B-': 0
-          },
-          path: 'Assets/Images/sohag2.jpg',
-          rate: '3.4'),
-      HospitalData(
-          name: 'Sohag General Hospital (Amiri)',
-          location: const GeoPoint(26.546488438173274, 31.700796062775662),
-          bloodTypes: {
-            'A+': 1,
-            'B+': 1,
-            'A-': 1,
-            'O+': 1,
-            'O-': 1,
-            'AB+': 1,
-            'AB-': 1,
-            'B-': 0
-          },
-          path: 'Assets/Images/sohag4.jpg',
-          rate: '3.4'),
-      HospitalData(
-          name: 'Sohag Military Hospital',
-          location: const GeoPoint(26.537983331590194, 31.708468806265916),
-          bloodTypes: {
-            'A+': 0,
-            'B+': 1,
-            'AB-': 0,
-            'A-': 0,
-            'O+': 0,
-            'O-': 0,
-            'AB+': 0,
-            'B-': 0
-          },
-          path: 'Assets/Images/sohag1.jpeg',
-          rate: '4.2'),
-    ];
-    final CollectionReference<Map<String, dynamic>> hospitalsCollection =
-        FirebaseFirestore.instance.collection('Hos');
-
-    for (var hospital in hospitals) {
-      await hospitalsCollection.add({
-        'name': hospital.name,
-        'location': hospital.location,
-        'path': hospital.path,
-        'rate': hospital.rate,
-        'bloodTypes': hospital.bloodTypes,
-      });
-    }
-
-    print('Hospitals data added to Firestore.');
-  }
+  
 }

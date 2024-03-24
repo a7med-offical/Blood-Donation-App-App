@@ -139,7 +139,6 @@ class _AcceptDonationState extends State<AcceptDonation>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff101530),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -168,7 +167,7 @@ class _AcceptDonationState extends State<AcceptDonation>
                   'Now , you can donate ',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.amber[400],
+                    
                     fontSize: 24.0,
                     fontWeight: FontWeight.bold,
                   ),
@@ -184,7 +183,7 @@ class _AcceptDonationState extends State<AcceptDonation>
                 padding: EdgeInsets.symmetric(horizontal: 40, vertical: 16),
                 child: Text(
                   'You can go to the cloest needed hospital to donate.',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                  style: TextStyle(fontSize: 18),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -233,6 +232,7 @@ class _AcceptDonationState extends State<AcceptDonation>
                   fixedSize:
                       Size.fromWidth(MediaQuery.of(context).size.width / 1.5),
                   shape: RoundedRectangleBorder(
+                  
                     borderRadius: BorderRadius.circular(25.0),
                     side: const BorderSide(color: Colors.amber),
                   ),

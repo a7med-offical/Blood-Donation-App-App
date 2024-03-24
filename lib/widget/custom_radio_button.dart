@@ -21,7 +21,7 @@ class CustomRadioButton extends StatelessWidget {
     return Container(
         height: 60,
         decoration: BoxDecoration(
-            color: (selected == index) ? Colors.amber[400] : Colors.transparent,
+            color: (selected == index) ? Colors.amber[400] : Colors.grey,
             borderRadius: BorderRadius.circular(15)),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -37,7 +37,7 @@ class CustomRadioButton extends StatelessWidget {
               child: Text(
                 text,
                 style: TextStyle(
-                    color: (selected == index) ? background : Colors.white70,
+                    color: (selected == index) ? background : Colors.black,
                     fontSize: 20),
               ),
             ),

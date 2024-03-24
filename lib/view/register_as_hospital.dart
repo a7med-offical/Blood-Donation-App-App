@@ -1,10 +1,11 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:bldapp/Colors.dart';
-import 'package:bldapp/Provider/notification_provider.dart';
+// import 'package:bldapp/Provider/notification_provider.dart';
 import 'package:bldapp/helper/notification_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Provider/theme_provider.dart';
 import 'updatessss/hospital.dart';
@@ -25,10 +26,9 @@ class _RegisterAsHospitalViewState extends State<RegisterAsHospitalView> {
     @override
   void initState() {
     super.initState();
-   
   }
 
- 
+  
   
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class _RegisterAsHospitalViewState extends State<RegisterAsHospitalView> {
                                   context,
                                   MaterialPageRoute(
                                       builder: ((context) => HospitalDashboard(
-        snap: snapshot.docs[0],
+                                            snap: snapshot.docs[0],
                                           ))));
                             });
                           }

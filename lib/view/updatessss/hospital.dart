@@ -1,6 +1,7 @@
 import 'package:bldapp/Provider/theme_provider.dart';
 import 'package:bldapp/view/SearchView.dart';
 import 'package:bldapp/view/hospital_dash_board/views/create_notfication_view.dart';
+import 'package:bldapp/view/ocr_view.dart';
 import 'package:bldapp/view/register_as_hospital.dart';
 import 'package:bldapp/view/updatessss/create_qr_coed.dart';
 import 'package:bldapp/view/updatessss/info.dart';
@@ -64,7 +65,7 @@ class _HospitalDashboardState extends State<HospitalDashboard> {
       Remove(
         id: widget.snap['id'],
       ),
-      DonationView(),
+    OCR_View (),
       NotificationView(),
     ];
 

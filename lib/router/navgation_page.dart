@@ -1,4 +1,3 @@
-import 'package:bldapp/view/updatessss/donar_details_info.dart';
 import 'package:bldapp/view/updatessss/scan_qr_code.dart';
 import 'package:go_router/go_router.dart';
 
